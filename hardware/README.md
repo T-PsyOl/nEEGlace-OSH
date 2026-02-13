@@ -9,7 +9,8 @@ device.
 
 The nEEGlace hardware is built around the following core components:
 
-- **Bela Mini** for real-time audio and control
+- ![**Bela GEM Stereo**](https://eu.shop.bela.io/products/bela-gem-stereo) for real-time audio and control
+   - We originally used the Bela Mini. However this is discontinued and we are moving to the Bela GEM Stereo  
 - **OpenBCI Cyton (8-channel) or Cyton + Daisy (16-channel)** for (ear)-EEG
 - **Roland CS-10EM binaural microphones** for stereo audio
 - **Battery Management System (BMS)** and rechargeable battery
