@@ -44,13 +44,17 @@ _Charging & Discharging:_
 
 **Hardware Components**
 
-1. 3.7 V 6000 mAh Li-ion battery
-2. Hailege USB-C / USB-A charging and discharging board
-3. MCP1700-330E low-dropout regulator (3.3 V)
-4. Decoupling capacitor on 5 V rail
+1. [3.7 V 6000 mAh Li-ion battery](https://www.reichelt.de/de/de/shop/produkt/li-ion_akku_soldered_333289_6000_mah_3_7_v-373553?PROVID=2788&gad_source=1&gad_campaignid=183379230&gbraid=0AAAAADwnxta8x0yYWdivk4HIYVx2_J6NZ&gclid=CjwKCAiA3L_JBhAlEiwAlcWO51JmLiWQyC8HWgx-cUKDrKQgi5Q3NVtTysLjH48ZbLqRPE6nEGL0sRoC1l8QAvD_BwE)
+2. [HiLetGo USB-C / USB-A charging and discharging board](https://www.amazon.de/HiLetgo-Discharging-Integrated-Interface-Compatible/dp/B0CDWT9295)
+3. [MCP1700-330E low-dropout regulator (3.3 V)](https://www.mouser.de/ProductDetail/Microchip-Technology/MCP1700T-3302E-MB?qs=WWgnj3qycfnlJJhwyn%2Fifw%3D%3D)
+4. Decoupling capacitor on 5 V rail- 10u and 100uF.
 5. Custom two-layer PCB
 6. Ground vias for noise reduction
 7. Through-hole pads for power connections (no pin headers)
+8. [Slider switch](https://www.reichelt.com/de/en/shop/product/slide_switch_straight_pitch_2_54_1_x_on_off_on-105710)
+9. [Cables](https://www.reichelt.com/de/en/shop/product/copper_wire_0_5mm_10m_black-404600)
+
+
 
 **PCB Design**
 
