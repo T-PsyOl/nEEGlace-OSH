@@ -35,7 +35,7 @@ Each subfolder documents one hardware module and its role in the overall system.
 ## Required Hardware Components
 
 ### 1. Processing and Control
-- **Bela Mini**
+- **Bela Gem Stereo**
   - Executes real-time audio and data acquisition code
   - Acts as the central control unit
 
@@ -87,7 +87,7 @@ The nEEGlace hardware follows these principles:
 
 - **Open hardware**: all designs are shared and documented
 - **Modularity**: individual components can be replaced or extended
-- **Low-noise design**: separation of EEG and audio signal paths
+- **Low-noise design**: separate EEG and audio signal paths
 - **Wearability**: suitable for long-term, real-world recordings
 
 ## Status
