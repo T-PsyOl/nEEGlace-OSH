@@ -5,7 +5,7 @@ The GUI application for nEEGlace device is built with CustomTkinter, PyQt5 and L
 The GUI helps to:
 1. Configure the EEG Device
 2. Configure the audio detection parameters for BELA
-3. Real-time visualisation of the EEG signal, Sound trigger and real-time ERP plotting 
+3. Real-time visualisation of the EEG signal, Sound trigger and Real-time ERP plotting 
 
 ## Installation Guide
 
