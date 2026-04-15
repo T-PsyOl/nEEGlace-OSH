@@ -59,7 +59,7 @@ _Charging & Discharging:_
 **PCB Design**
 
 The BMS PCB was designed using EasyEDA and optimized for wearable electronics:
-<img width="461" height="324" alt="Screenshot 2026-01-31 at 1 59 58 PM" src="https://github.com/user-attachments/assets/00a4f526-55b7-4dbc-b651-99a9f5e79cac" />
+<img width="586" height="454" alt="Screenshot 2026-04-15 at 8 44 06 AM" src="https://github.com/user-attachments/assets/40c367aa-004d-47a8-813d-d36750fb36e6" />
 
 1. Two-layer PCB
 2. Top layer: power routing and component placement
