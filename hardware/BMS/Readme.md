@@ -1,6 +1,6 @@
 # nEEGlace – Battery Management System (BMS)
 
-<ins>## Overview</ins>
+## <ins>Overview</ins>
 
 This project presents a custom Battery Management System (BMS) designed for the nEEGlace wearable EEG platform. The system provides battery charging, power regulation, and safe voltage distribution for embedded computing, EEG acquisition hardware, and microphone peripherals. It is specifically designed with participant safety and data integrity in mind for neuroscience research.
 
