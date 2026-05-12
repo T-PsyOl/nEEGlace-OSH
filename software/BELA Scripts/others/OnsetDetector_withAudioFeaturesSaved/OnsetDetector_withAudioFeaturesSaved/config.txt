@@ -1,0 +1,4 @@
+energyThreshold 0.05
+recordAudio 0
+recordDuration 300
+inputGain 55
