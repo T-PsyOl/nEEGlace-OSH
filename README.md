@@ -24,15 +24,31 @@ real-world settings.
 
 ## Scientific Background
 
-The current nEEGlace open-hardware platform builds on an earlier version of
-nEEGlace, which was developed as a mounting system for mobile EEG recordings
-beyond the laboratory. The original system combined a commercial,
-research-grade EEG amplifier with a commercial neck speaker, creating a
-neck-worn platform that allowed EEG to be recorded over extended periods while
-also enabling sound playback and audio recording.
+nEEGlace-OpenHardware builds on several stages of previous work on mobile,
+neck-worn EEG systems for studying brain activity beyond the laboratory.
+
+An early precursor was used in a long-term mobile ear-EEG study on auditory
+attention in everyday life. In that study, a mobile EEG amplifier was attached
+to headphones worn around the neck, which were also used for sound presentation.
+Participants wore the setup for several hours while performing auditory oddball
+tasks in the laboratory and during normal office routines. This work showed that
+long-term mobile EEG recordings can be used to study auditory processing in
+everyday settings.
+The study can be found here:
+
+[Hölle, D., Meekes, J., & Bleichner, M. G. (2021). Mobile ear-EEG to study
+auditory attention in everyday life. *Behavior Research Methods*, 53,
+2025–2036.](https://doi.org/10.3758/s13428-021-01538-0)
+
+Based on this experience, the original nEEGlace system was developed as a more
+integrated neck-worn platform. It combined a commercial, research-grade EEG
+amplifier with a commercial neck speaker, creating a compact system for mobile
+EEG recordings with integrated sound presentation and contextual audio
+recording.
 
 The original nEEGlace project is documented in the previous repository:
-[https://github.com/T-PsyOl/neeglace](https://github.com/T-PsyOl/neeglace).
+
+[https://github.com/T-PsyOl/neeglace](https://github.com/T-PsyOl/neeglace)
 
 The associated hardware metapaper was published in the *Journal of Open
 Hardware*:
@@ -41,17 +57,25 @@ Hardware*:
 Commercial Neck Speaker and a Commercial EEG Amplifier to Record Brain Activity
 Beyond the Lab. *Journal of Open Hardware*, 4(1).](https://doi.org/10.5334/joh.25)
 
-Using this earlier nEEGlace model, we conducted studies on mobile and
-naturalistic EEG recordings, particularly in the context of auditory
-neuroscience. These studies showed that a neck-worn system can support EEG
-recordings outside conventional laboratory settings and can be used to relate
-brain activity to sound presentation and the acoustic environment.
+This nEEGlace version was subsequently used in a study on smartphone-based
+ear-EEG for investigating sound processing in everyday life. In that work,
+participants were equipped with the nEEGlace, a smartphone-based recording setup, and microphones for recording
+the acoustic environment. The study demonstrated how mobile EEG recordings can
+be combined with contextual sound information to investigate neural responses
+to sounds in more naturalistic conditions.
 
-The current open-hardware version continues this line of work but shifts the
-focus from adapting commercial components toward a reproducible, extensible, and
-documented hardware platform. It retains the central scientific motivation of
-recording neural activity together with contextual information in everyday
-environments, while making the system easier to reproduce, modify, and further
+The study is described here:
+
+[Hölle, D., & Bleichner, M. G. (2023). Smartphone-based
+ear-electroencephalography to study sound processing in everyday life.
+*European Journal of Neuroscience*, 58(7), 3671–3685.](https://doi.org/10.1111/ejn.16124)
+
+The current nEEGlace-OpenHardware platform continues this line of work. Whereas
+the earlier systems relied on adapting and integrating commercial components,
+nEEGlace-OpenHardware is designed as a reproducible, modular, and extensible
+open-hardware platform. It retains the central scientific aim of recording
+neural activity together with contextual information in everyday environments,
+while making the system easier to document, reproduce, modify, and further
 develop.
 
 ## System Overview
