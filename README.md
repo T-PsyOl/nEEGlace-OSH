@@ -80,17 +80,33 @@ develop.
 
 ## System Overview
 
-nEEGlace combines the following core elements:
+## System Overview
+nEEGlace is designed around a modular, 3D-printable casing that can be worn around
+the neck. The casing houses the core components required for mobile EEG and
+contextual audio recording and provides a reproducible mechanical platform for
+integrating different hardware configurations.
 
-- **(Ear)-EEG acquisition** 
-- **Binaural audio recording** 
-- **Real-time processing and control** 
-- **Battery-powered operation** 
-- **Wearable form factor**
+The system includes:
 
-The system is modular by design, allowing individual components (e.g., EEG
-amplifier, microphones, casing) to be modified or replaced without redesigning
-the entire platform.
+- **A neck-worn casing** that can be 3D printed and adapted to house different
+  hardware components and configurations.
+- **Electrode connectors** for connecting ear-EEG electrodes, such as cEEGrids,
+  or other EEG electrode arrangements.
+- **An EEG acquisition system** for recording neural activity during mobile
+  measurements.
+- **An audio processing board** for real-time audio processing, event
+  extraction, and event injection into the EEG data stream.
+- **Binaural microphones** for recording the acoustic environment from the
+  wearer’s perspective.
+- **A battery unit** that powers all components for several hours of mobile
+  operation.
+
+The system is modular by design. Components such as the EEG system, audio board,
+microphones, battery unit, connectors, and casing parts can be modified,
+replaced, or reconfigured without redesigning the full platform. This allows
+nEEGlace to serve as a general neck-worn hardware platform for mobile
+neurophysiology and context-aware sensing, rather than as a fixed device tied to
+one specific hardware setup.
 
 ## Repository Structure
 
