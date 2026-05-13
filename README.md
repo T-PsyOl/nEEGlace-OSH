@@ -22,6 +22,38 @@ nEEGlace addresses these limitations by integrating ear-EEG with additional
 contextual sensors into a neck-worn, wearable system that can be used in
 real-world settings.
 
+## Scientific Background
+
+The current nEEGlace open-hardware platform builds on an earlier version of
+nEEGlace, which was developed as a mounting system for mobile EEG recordings
+beyond the laboratory. The original system combined a commercial,
+research-grade EEG amplifier with a commercial neck speaker, creating a
+neck-worn platform that allowed EEG to be recorded over extended periods while
+also enabling sound playback and audio recording.
+
+The original nEEGlace project is documented in the previous repository:
+[https://github.com/T-PsyOl/neeglace](https://github.com/T-PsyOl/neeglace).
+
+The associated hardware metapaper was published in the *Journal of Open
+Hardware*:
+
+[Bleichner, M. G., & Emkes, R. (2020). Building an Ear-EEG System by Hacking a
+Commercial Neck Speaker and a Commercial EEG Amplifier to Record Brain Activity
+Beyond the Lab. *Journal of Open Hardware*, 4(1).](https://doi.org/10.5334/joh.25)
+
+Using this earlier nEEGlace model, we conducted studies on mobile and
+naturalistic EEG recordings, particularly in the context of auditory
+neuroscience. These studies showed that a neck-worn system can support EEG
+recordings outside conventional laboratory settings and can be used to relate
+brain activity to sound presentation and the acoustic environment.
+
+The current open-hardware version continues this line of work but shifts the
+focus from adapting commercial components toward a reproducible, extensible, and
+documented hardware platform. It retains the central scientific motivation of
+recording neural activity together with contextual information in everyday
+environments, while making the system easier to reproduce, modify, and further
+develop.
+
 ## System Overview
 
 nEEGlace combines the following core elements:
