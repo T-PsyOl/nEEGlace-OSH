@@ -79,8 +79,6 @@ while making the system easier to document, reproduce, modify, and further
 develop.
 
 ## System Overview
-
-## System Overview
 nEEGlace is designed around a modular, 3D-printable casing that can be worn around
 the neck. The casing houses the core components required for mobile EEG and
 contextual audio recording and provides a reproducible mechanical platform for
