@@ -96,7 +96,7 @@ double lastLogTime = 0.0;                      // Last time we logged (in second
 const double logInterval = 1.0;                // Log every 1 second
 
 // Define variables for FFT calculations
-const int FFT_WINDOW_SIZE = 256;
+const int FFT_WINDOW_SIZE = 512;
 fftwf_plan fftPlan;
 std::vector<float> fftInput;
 fftwf_complex* fftOutput = nullptr;
