@@ -1,0 +1,12 @@
+﻿No.	Quantity	Comment	Designator	Footprint	Value	Manufacturer Part	Manufacturer	Supplier Part	Supplier	Add into BOM	Unique ID	Name	Device	3D Model Title	Convert to PCB
+1	2	10uF	C3,C4	C0603	10uF	CL10A106KP8NNNC	SAMSUNG(三星)	C19702	LCSC	yes		10uF	CL10A106KP8NNNC	C0603_L1.6-W0.8-H0.8	
+2	1	PJ-322环保	CN1	AUDIO-TH_HOOYA_PJ-322		PJ-322环保	HOOYA(皓宇电子)	C2939185	LCSC	yes		PJ-322环保	PJ-322环保	AUDIO-TH_HOOYA_PJ-322	
+3	2	Conn_01x03	J1,J2	Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical						yes	1fb9863844ab5169,51bfc0e5166a1c40	Conn_01x03	Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical		
+4	1	Conn_01x10	J3	Connector_PinSocket_2.54mm:PinSocket_1x10_P2.54mm_Vertical						yes	bd3ee0abdb58119f	Conn_01x10	Connector_PinSocket_2.54mm:PinSocket_1x10_P2.54mm_Vertical		
+5	1	Conn_01x05	J9	Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical						yes	14b2f8436ec73be4	Conn_01x05	Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical		
+6	4	2.2kΩ	R1,R1,R1,R2	R0603	2.2kΩ	FRC0603F2201TS	FOJAN(富捷)	C2907005	LCSC	yes		2.2kΩ	FRC0603F2201TS	R0603	
+7	1	10kΩ	R3	R0805	10kΩ	FRC0805J103TS	FOJAN(富捷)	C2930231	LCSC	yes		10kΩ	FRC0805J103TS	R0805_L2.0-W1.3-H0.6	
+8	1	1MΩ	R4	R1206	1MΩ	1206W4F1004T5E	UNI-ROYAL(厚声)	C17927	LCSC	yes		1MΩ	1206W4F1004T5E	R1206_L3.2-W1.6-H0.6	
+9	1	PocketBeagle3D_for_Belamini	REF**	Bela:PocketBeagle3D_for_Belamini						yes	36725bbfc0c5b046	PocketBeagle3D_for_Belamini	Bela:PocketBeagle3D_for_Belamini		
+10	1	S2B-PH-K-S(LF)(SN)	U1	CONN-TH_S2B-PH-K-S-LF-SN		S2B-PH-K-S(LF)(SN)	JST	C173752	LCSC	yes		S2B-PH-K-S(LF)(SN)	S2B-PH-K-S(LF)(SN)	CONN-TH_HR-PH2.0-WI-2P	
+11	2	S4B-PH-K-S(LF)(SN)	U2,U3	CONN-TH_4P-P2.00_S4B-PH-K-S-LF-SN		S4B-PH-K-S(LF)(SN)	JST	C157926	LCSC	yes		S4B-PH-K-S(LF)(SN)	S4B-PH-K-S(LF)(SN)	CONN-TH_4P-P2.00_S4B-PH-K-S-LF-SN	
