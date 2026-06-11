@@ -37,4 +37,5 @@ function syncBela(savepath, project_name, ip_address)
             system(cmd);
         end
     end 
+    dir(savepath)
 end 
