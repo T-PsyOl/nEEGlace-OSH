@@ -41,7 +41,9 @@ b) 3.3 V Distribution: A Low-Dropout Regulator (LDO) steps the 5 V down to a hig
 
 ## <ins>PCB Design</ins>
 
-<img width="586" height="454" alt="Screenshot 2026-04-15 at 8 44 06 AM" src="https://github.com/user-attachments/assets/4640775b-47fc-4426-aa75-cca3b2e4273e" />
+<img width="617" height="519" alt="nEEGlace_BMS_PCB" src="https://github.com/user-attachments/assets/8274f58a-faea-488e-b116-29cde3000a23" />
+<img width="397" height="352" alt="PCB_PCB_nEEGlace_BMS" src="https://github.com/user-attachments/assets/459e5c0f-78d7-427a-b42a-39dd8899824b" />
+
 
 The BMS PCB was designed using EasyEDA, tailored specifically for integration into a wearable electronics enclosure:
 1) _Two-Layer Architecture:_ The top layer handles power routing, while the bottom layer is a continuous copper "ground plane." This solid ground plane acts as a shield, minimizing electromagnetic interference (EMI) that could corrupt sensitive EEG data.
