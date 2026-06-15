@@ -1,8 +1,0 @@
-﻿ID	Name	Designator	Footprint	Quantity	Manufacturer Part	Manufacturer	Supplier	Supplier Part	Price	Pins	3DModel	Contributor	JLCPCB Part Class	link
-"1"	"47uF"	"C5,C1"	"CAP-TH_BD5.0-P2.00-D0.8-FD"	"2"	"KM476M016D11RR0VH2FP0"	"Chengx(承兴)"	"LCSC"	"C22320"	"0.017"	"2"	"CAP-TH_D5.0×H7.0×P2.0"	"lcsc"	"Extended Part"	"https://item.szlcsc.com/44805.html"
-"2"	"CONN-TH_S2B-PH-K-S-LF-SN"	"U2,U3,U4,U5,U6,U7"	"CONN-TH_S2B-PH-K-S-LF-SN"	"6"	"S2B-PH-K-S(LF)(SN)"	"JST"	"LCSC"	"C173752"	"0.039"	"2"	"CONN-TH_HR-PH2.0-WI-2P"	"立创EDA官方封装库"	"Extended Part"	"https://lcsc.com/eda_search?q=C173752&%26type=1&ref=editor"
-"3"	"SW-TH_EG2210"	"U1"	"SW-TH_EG2210"	"1"	"EG2210"	"E-Switch"	"LCSC"	"C3664585"	"0.542"	"8"	"SW-TH_EG2210"	"lcsc"	"Extended Part"	"https://lcsc.com/eda_search?q=C3664585&%26type=1&ref=editor"
-"4"	"LDO"	"LDO"	"SOT-89-3_L4.5-W2.5-P1.50-LS4.2-BR"	"1"	"MCP1700T-3302E/MB"	"MICROCHIP(美国微芯)"	"LCSC"	"C632000"	"0.627"	"3"	"SOT-89-3_L4.3-W2.5-H1.6-LS4.1-P1.50"	"LCSC"	"Extended Part"	"https://item.szlcsc.com/421845.html"
-"5"	"SI2301CDS-T1-GE3-ES"	"MOSFET"	"SOT-23-3_L2.9-W1.3-P1.90-LS2.4-BR"	"1"	"SI2301CDS-T1-GE3-ES"	"ElecSuper(静芯)"	"LCSC"	"C5224168"	"0.017"	"3"	"SOT-23-3P_L2.9-W1.3-H1.0-LS2.4-P0.95"	"lcsc"	"Extended Part"	"https://www.diodes.com/assets/Package-Files/SOT23.pdf"
-"6"	"RESISTOR10K"	"R4"	"RESISTOR10K"	"1"	""	""	""	""	""	"2"	""	"jayalathczoom"	""	""
-"7"	"100KRESISTOR"	"100KOHM"	"100KRESISTOR"	"1"	"MCMF0W4FF1003A50"	"MULTICOMP PRO"	"Element14"	"1652644"	""	"2"	""	"Guest"	""	"https://au.element14.com/multicomp/mcmf0w4ff1003a50/resistance-100kohm/dp/1652644"
