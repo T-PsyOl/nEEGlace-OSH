@@ -1,0 +1,6 @@
+﻿Designator	Device	Footprint	Mid X	Mid Y	Ref X	Ref Y	Pad X	Pad Y	Pins	Layer	Rotation	SMD	Comment	Name
+"H1"	"HX PH254-01-02-Z-L11.5 male header connector"	"HDR-TH_2P-P2.54-V-M"	"-69.723mm"	"78.994mm"	"-69.723mm"	"78.994mm"	"-70.993mm"	"78.994mm"	"2"	"T"	"0"	"No"	"HX PH254-01-02-Z-L11.5 male header connector"	"HX PH254-01-02-Z-L11.5 male header connector"
+"H2"	"HX PH254-01-02-Z-L11.5 male header connector"	"HDR-TH_2P-P2.54-V-M"	"-64.516mm"	"78.994mm"	"-64.516mm"	"78.994mm"	"-65.786mm"	"78.994mm"	"2"	"T"	"0"	"No"	"HX PH254-01-02-Z-L11.5 male header connector"	"HX PH254-01-02-Z-L11.5 male header connector"
+"H3"	"HX PH254-01-02-Z-L11.5 male header connector"	"HDR-TH_2P-P2.54-V-M"	"-69.723mm"	"76.421mm"	"-69.723mm"	"76.421mm"	"-70.993mm"	"76.421mm"	"2"	"T"	"0"	"No"	"HX PH254-01-02-Z-L11.5 male header connector"	"HX PH254-01-02-Z-L11.5 male header connector"
+"H4"	"HX PH254-01-02-Z-L11.5 male header connector"	"HDR-TH_2P-P2.54-V-M"	"-64.499mm"	"76.421mm"	"-64.499mm"	"76.421mm"	"-65.769mm"	"76.421mm"	"2"	"T"	"0"	"No"	"HX PH254-01-02-Z-L11.5 male header connector"	"HX PH254-01-02-Z-L11.5 male header connector"
+"H5"	"HX PH254-01-02-Z-L11.5 male header connector"	"HDR-TH_2P-P2.54-V-M"	"-60.579mm"	"77.724mm"	"-60.579mm"	"77.724mm"	"-60.579mm"	"78.994mm"	"2"	"T"	"270"	"No"	"HX PH254-01-02-Z-L11.5 male header connector"	"HX PH254-01-02-Z-L11.5 male header connector"
