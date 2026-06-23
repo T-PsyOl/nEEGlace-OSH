@@ -1,27 +1,5 @@
 # <ins>nEEGlace – Battery Management System (BMS)</ins>
 
-
-
-## <ins>Hardware Components</ins>
-
-1. [3.7 V 6000 mAh Li-ion battery](https://www.reichelt.de/de/de/shop/produkt/li-ion_akku_soldered_333289_6000_mah_3_7_v-373553?PROVID=2788&gad_source=1&gad_campaignid=183379230&gbraid=0AAAAADwnxta8x0yYWdivk4HIYVx2_J6NZ&gclid=CjwKCAiA3L_JBhAlEiwAlcWO51JmLiWQyC8HWgx-cUKDrKQgi5Q3NVtTysLjH48ZbLqRPE6nEGL0sRoC1l8QAvD_BwE)
-2. [HiLetGo USB-C / USB-A charging and discharging board](https://www.amazon.de/HiLetgo-Discharging-Integrated-Interface-Compatible/dp/B0CDWT9295)
-3. [MCP1700-330E low-dropout regulator (3.3 V)](https://www.mouser.de/ProductDetail/Microchip-Technology/MCP1700T-3302E-MB?qs=WWgnj3qycfnlJJhwyn%2Fifw%3D%3D)
-4. [Schottky Diode(for unidirectional charge routing)](https://www.mouser.de/ProductDetail/Rectron/SR340-T?qs=2Exw0Z2g%252BZB953JkMkBZbA%3D%3D&mgh=1&vip=1&utm_id=20979042631&utm_source=google&utm_medium=cpc&utm_marketing_tactic=emeacorp&gad_source=1&gad_campaignid=20975737652&gbraid=0AAAAADn_wf0w41oU7Wab0nVdvJgo4DlKu&gclid=CjwKCAiA3L_JBhAlEiwAlcWO5z4tOhBydDzV852ASn-9xmEuQRKEQAsSAIz2j41eMdDuO-YCp13g2hoCTvcQAvD_BwE)
-5. [MOSFET(for safety load-switching)](https://www.mouser.de/ProductDetail/Vishay-Semiconductors/SI2301CDS-T1-E3?qs=45wPT2wjtGkQH%252ByrbRpz4Q%3D%3D&utm_id=22433149193&utm_source=google&utm_medium=cpc&utm_marketing_tactic=emeacorp&gad_source=1&gad_campaignid=22426719006&gbraid=0AAAAADn_wf09UgNR-R2CLlcM_vOvQDQnU&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9j7y7uiJBoyNoxLyqbDPPBvmXoioG-sIvvJfj0rHu6TZKW7d9wGAhoC2ucQAvD_BwE)
-6. 100 kΩ and 10 kΩ resistors (supporting the MOSFET circuit)
-7. Decoupling capacitor on 5 V rail- 10u and 100uF.
-8. Custom two-layer PCB
-9. Ground vias for noise reduction
-10. Through-hole pads for power connections (no pin headers)
-11. [Slider switch](https://www.reichelt.com/de/en/shop/product/slide_switch_straight_pitch_2_54_1_x_on_off_on-105710)
-12. [Cables](https://www.reichelt.com/de/en/shop/product/copper_wire_0_5mm_10m_black-404600)
-    # nEEGlace BMS — Battery Management & Power Distribution PCB
-
-> A compact battery management and power-distribution board for the **nEEGlace** wearable EEG system, providing charge-safe power switching, 5V regulation via a HiLetgo boost/charge module, and 3.3V LDO regulation for OpenBCI and Bela Cape microphone inputs.
-
-![PCB 3D Render](nEEGlace_BMS_PCB.png)
-
 ---
 
 ## Table of Contents
@@ -43,13 +21,7 @@
 - [Signal Routing & Design Rationale](#signal-routing--design-rationale)
 - [Connector Pinouts](#connector-pinouts)
 - [Layer Stack](#layer-stack)
-- [Assembly Guide](#assembly-guide)
-- [Getting Started](#getting-started)
 - [Use Cases](#use-cases)
-- [Recommended Additions for Research & Production Use](#recommended-additions-for-research--production-use)
-- [Contributing](#contributing)
-- [License](#license)
-
 ---
 
 ## Overview
@@ -62,10 +34,10 @@ The **nEEGlace BMS** is a single-layer-routed, two-layer PCB that sits between a
 - **Regulated 3.3V output** (via onboard LDO) for the OpenBCI board and the microphone bias input on the Bela Cape
 
 This board is designed for:
-- 🔋 Portable / wearable EEG data acquisition (nEEGlace headset)
-- 🎧 Powering a Bela Cape + Bela embedded audio platform from battery
-- 🧠 Safe co-operation with OpenBCI boards on a shared battery rail
-- ⚡ Automatic charge-safe shutdown — no manual power cycling required when charging
+- Portable / wearable EEG data acquisition (nEEGlace headset)
+- Powering a Bela Cape + Bela embedded audio platform from battery
+-  Safe co-operation with OpenBCI boards on a shared battery rail
+-  Automatic charge-safe shutdown — no manual power cycling required when charging
 
 ---
 
@@ -120,19 +92,8 @@ nEEGlace BMS/
 ---
 
 ## Hardware Overview
+<img width="647" height="459" alt="Screenshot 2026-06-23 at 10 32 29 PM" src="https://github.com/user-attachments/assets/9d7c4f61-89f9-4ae3-a562-01f3899493d3" />
 
-```
-                    ┌─────────────────────────────────────────────────────┐
-                    │              nEEGlace BMS — TOP VIEW                 │
-                    │                                                       │
-        [Mic 3.3V] ─┤                                          ├─ [3.3V OBCI]
-                    │                          [LDO: MCP1700T]           │
-        [Bela 5V] ──┤                          [MOSFET: SSI2301CDS]      │
-                    │                                          ├─ [HiLetgo 5V]
-        [Battery] ──┤            [Switch (S)]                  │
-                    │                                          ├─ [HiLetgo]
-                    └─────────────────────────────────────────────────────┘
-```
 
 **Board form factor:** Small wearable-friendly form factor for the nEEGlace headset
 **Layer count:** 2 (signal + ground plane)
@@ -141,6 +102,23 @@ nEEGlace BMS/
 ---
 
 ## Component Reference
+
+## <ins>Hardware Components</ins>
+
+1. [3.7 V 6000 mAh Li-ion battery](https://www.reichelt.de/de/de/shop/produkt/li-ion_akku_soldered_333289_6000_mah_3_7_v-373553?PROVID=2788&gad_source=1&gad_campaignid=183379230&gbraid=0AAAAADwnxta8x0yYWdivk4HIYVx2_J6NZ&gclid=CjwKCAiA3L_JBhAlEiwAlcWO51JmLiWQyC8HWgx-cUKDrKQgi5Q3NVtTysLjH48ZbLqRPE6nEGL0sRoC1l8QAvD_BwE)
+2. [HiLetGo USB-C / USB-A charging and discharging board](https://www.amazon.de/HiLetgo-Discharging-Integrated-Interface-Compatible/dp/B0CDWT9295)
+3. [MCP1700-330E low-dropout regulator (3.3 V)](https://www.mouser.de/ProductDetail/Microchip-Technology/MCP1700T-3302E-MB?qs=WWgnj3qycfnlJJhwyn%2Fifw%3D%3D)
+4. [Schottky Diode(for unidirectional charge routing)](https://www.mouser.de/ProductDetail/Rectron/SR340-T?qs=2Exw0Z2g%252BZB953JkMkBZbA%3D%3D&mgh=1&vip=1&utm_id=20979042631&utm_source=google&utm_medium=cpc&utm_marketing_tactic=emeacorp&gad_source=1&gad_campaignid=20975737652&gbraid=0AAAAADn_wf0w41oU7Wab0nVdvJgo4DlKu&gclid=CjwKCAiA3L_JBhAlEiwAlcWO5z4tOhBydDzV852ASn-9xmEuQRKEQAsSAIz2j41eMdDuO-YCp13g2hoCTvcQAvD_BwE)
+5. [MOSFET(for safety load-switching)](https://www.mouser.de/ProductDetail/Vishay-Semiconductors/SI2301CDS-T1-E3?qs=45wPT2wjtGkQH%252ByrbRpz4Q%3D%3D&utm_id=22433149193&utm_source=google&utm_medium=cpc&utm_marketing_tactic=emeacorp&gad_source=1&gad_campaignid=22426719006&gbraid=0AAAAADn_wf09UgNR-R2CLlcM_vOvQDQnU&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9j7y7uiJBoyNoxLyqbDPPBvmXoioG-sIvvJfj0rHu6TZKW7d9wGAhoC2ucQAvD_BwE)
+6. 100 kΩ and 10 kΩ resistors (supporting the MOSFET circuit)
+7. Decoupling capacitor on 5 V rail- 10u and 100uF.
+8. Custom two-layer PCB
+9. Ground vias for noise reduction
+10. Through-hole pads for power connections (no pin headers)
+11. [Slider switch](https://www.reichelt.com/de/en/shop/product/slide_switch_straight_pitch_2_54_1_x_on_off_on-105710)
+12. [Cables](https://www.reichelt.com/de/en/shop/product/copper_wire_0_5mm_10m_black-404600)
+
+> A compact battery management and power-distribution board for the **nEEGlace** wearable EEG system, providing charge-safe power switching, 5V regulation via a HiLetgo boost/charge module, and 3.3V LDO regulation for OpenBCI and Bela Cape microphone inputs.
 
 ### Battery Connector
 
@@ -294,7 +272,7 @@ Battery ──[Switch S]──► HiLetgo (battery terminal)
 
 This means the nEEGlace headset **cannot be operated while its battery is charging** — a deliberate safety/noise-isolation choice rather than a limitation, since charging current and switching noise from most USB power sources would otherwise contaminate EEG and audio signal acquisition.
 
-> ⚠️ Confirm the exact gate-bias resistor values and MOSFET orientation against `Schematic_nEEGlace_BMS.pdf` before reproducing this board — the description above reflects the intended design behaviour.
+>  Confirm the exact gate-bias resistor values and MOSFET orientation against `Schematic_nEEGlace_BMS.pdf` before reproducing this board — the description above reflects the intended design behaviour.
 
 ---
 
@@ -316,7 +294,7 @@ Using the manual switch alone cannot distinguish "battery discharging" from "bat
 
 ## Connector Pinouts
 
-> ⚠️ The table below is derived from the PCB silkscreen and 3D render inspection. **Always cross-reference with `Schematic_nEEGlace_BMS.pdf`** and `BMS_PCB_Connections.pdf` for confirmed pin assignments before wiring external hardware.
+> The table below is derived from the PCB silkscreen and 3D render inspection. **Always cross-reference with `Schematic_nEEGlace_BMS.pdf`** and `BMS_PCB_Connections.pdf` for confirmed pin assignments before wiring external hardware.
 
 | Connector | Pin 1 | Pin 2 | Notes |
 |-----------|-------|-------|-------|
@@ -342,133 +320,19 @@ Using the manual switch alone cannot distinguish "battery discharging" from "bat
 
 ---
 
-## Assembly Guide
-
-### Component Placement Order
-
-1. **SMD passives** — gate-bias resistors (10 kΩ / 100 kΩ network)
-2. **MOSFET** — SSI2301CDS-T1-E3 (SOT-23-3P), verify gate/drain/source orientation against the schematic before soldering
-3. **LDO** — MCP1700T-3302 (SOT-89-3), confirm pinout (IN / GND / OUT) against the datasheet in `Datasheets/`
-4. **Through-hole power switch (S)** — solder last to avoid mechanical stress on nearby SMD joints
-5. **Edge connectors** — Battery, HiLetgo, HiLetgo 5V, Bela 5V, 3.3V OBCI, Mic 3.3V
-
-### Tips
-
-- **Verify MOSFET orientation** under magnification — a reversed SSI2301CDS-T1-E3 will either disable charge-protection entirely or hold the system permanently off
-- **Check LDO pinout** against the MCP1700T-3302 datasheet before soldering; many SOT-89-3 parts share a footprint but differ in pin assignment between manufacturers
-- Use a multimeter to confirm the **10 kΩ / 100 kΩ gate-bias network** values before powering on for the first time
-- Test charge-cutoff behaviour with a **bench supply standing in for the battery** before connecting a real Li-ion cell, to avoid risking the battery during debug
-
----
-
-## Getting Started
-
-### Step 1 — Order PCBs
-
-Send `Gerber_nEEGlace_BMS_PCB.zip` (or `odb++_pcb_BMS.tgz`) to your preferred fab house:
-
-| Fab | Region | Notes |
-|-----|--------|-------|
-| [JLCPCB](https://jlcpcb.com) | Global (China) | Cheapest, fast shipping |
-| [PCBWay](https://pcbway.com) | Global | Good quality, PCBA available |
-| [Aisler](https://aisler.net) | Europe (DE) | GDPR-friendly, higher quality finish |
-| [Eurocircuits](https://eurocircuits.com) | Europe (BE) | High precision, IPC Class 2 |
-
-**Recommended fab settings:**
-- Layers: **2**
-- Thickness: **1.6 mm** (or thinner, e.g. 1.0 mm, for wearable applications)
-- Surface finish: **ENIG** (gold) — preferred for long-term contact reliability on a wearable
-- Copper weight: **1 oz**
-
-### Step 2 — Source Components
-
-Use `Assembly files/` (pick-and-place data) and the datasheets in `Datasheets/` to source:
-- HiLetgo charge/boost breakout module
-- MCP1700T-3302 LDO
-- SSI2301CDS-T1-E3 MOSFET
-- Gate-bias resistors (10 kΩ, 100 kΩ)
-- Power switch
-- Single-cell Li-ion/Li-Po battery with matching connector
-
-### Step 3 — Assemble
-
-Follow the [Assembly Guide](#assembly-guide) above. For production quantities, use the `Assembly files/` folder to order PCBA directly from JLCPCB or PCBWay.
-
-### Step 4 — Integrate with nEEGlace
-
-1. Wire the `Battery` connector to the Li-ion/Li-Po cell
-2. Wire `HiLetgo` and `HiLetgo 5V` to the HiLetgo module's battery and 5V output terminals
-3. Connect `Bela 5V` to the Bela Cape's `5V Input` connector
-4. Connect `3.3V OBCI` to the OpenBCI board's power input
-5. Connect `Mic 3.3V` to the Bela Cape's microphone bias rail
-6. Flip the switch (S) — confirm Bela, OpenBCI, and mic bias all power up
-7. Connect USB-C to the HiLetgo module and confirm the system **powers down automatically** while charging
-
-### Step 5 — Verify Charge-Safety Behaviour
-
-With a bench supply or charged battery, toggle the HiLetgo module's USB-C connection on and off while monitoring the `Bela 5V` and `3.3V OBCI` rails with a multimeter — voltage should collapse to ~0V whenever USB-C charging is active.
-
----
-
 ## Use Cases
 
-### 🧠 Wearable EEG + Audio Acquisition (nEEGlace)
+### Wearable EEG + Audio Acquisition (nEEGlace)
 
 Powers the full nEEGlace stack — Bela (audio/triggering), OpenBCI (EEG acquisition), and the Bela Cape's microphone front-end — from a single rechargeable battery, with automatic protection against operating the system while charging.
 
-### 🔌 Charge-Safe Battery Power for Bela Projects
+### Charge-Safe Battery Power for Bela Projects
 
 Can be reused as a general-purpose charge-safe 5V/3.3V battery power supply for any Bela-based project that should never run while its battery is on charge.
 
-### 🎧 Combined Bio-signal + Audio Synchronisation
+### Combined Bio-signal + Audio Synchronisation
 
 Pairs naturally with the companion **Bela Cape (Bela Gem Stereo)** board's D0/D1 trigger lines, enabling synchronised EEG and audio event marking from a single battery-powered, wearable platform.
 
 ---
 
-## Recommended Additions for Research & Production Use
-
-### Hardware (Next PCB Revision)
-
-- [ ] **Battery voltage monitoring tap** (resistor divider to an ADC-safe level) — enables low-battery warnings before unexpected shutdown
-- [ ] **Reverse-polarity / overcurrent protection** on the Battery input
-- [ ] **Status LEDs** — one for "system ON," one for "charging" — instant visual feedback without a meter
-- [ ] **Test points** on the gate-bias node, LDO output, and gated 5V rail for oscilloscope/multimeter probing during bring-up
-- [ ] **Mounting holes** sized for the nEEGlace headset enclosure
-- [ ] **Soft-start / debounce** on the charge-detect MOSFET gate to avoid chatter during USB-C plug/unplug transients
-
-### Software / Firmware
-
-- [ ] **Bela example sketch** confirming safe power-up sequencing (e.g. waiting for a stable 3.3V mic-bias rail before sampling audio)
-- [ ] **Battery life test log** — measured runtime under typical nEEGlace load (Bela + OpenBCI + mic bias active)
-
-### Documentation
-
-- [ ] **Schematic PNG export** — single-image schematic for quick reference without opening a PDF
-- [ ] **Measured specifications** — quiescent current, charge-cutoff response time, LDO ripple rejection, battery runtime
-- [ ] **Version changelog** — track hardware revisions with what changed, why, and which Gerbers correspond to which version
-- [ ] **Known issues / errata**
-
-### Repository / CI
-
-- [ ] **GitHub Releases** — tag each stable hardware revision with Gerbers attached as release assets
-- [ ] **DOI via Zenodo** — archive a stable release for citation in academic papers describing the nEEGlace system
-
----
-
-## Contributing
-
-Contributions are welcome in any form — schematic corrections, layout improvements, firmware examples, or documentation.
-
-1. Fork this repository
-2. Create a descriptive branch: `git checkout -b hw/add-battery-monitor` or `docs/update-pinout`
-3. Make your changes; for hardware changes, regenerate Gerbers and any assembly files
-4. Open a Pull Request with a clear description of **what** changed and **why**
-
-For significant hardware changes, please include before/after images of the affected PCB area and update the schematic PDF.
-
----
-
-
-
-T
