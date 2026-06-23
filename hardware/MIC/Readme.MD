@@ -29,12 +29,6 @@
 - [Signal Routing & Design Rationale](#signal-routing--design-rationale)
 - [Connector Pinout](#connector-pinout)
 - [Layer Stack](#layer-stack)
-- [Assembly Guide](#assembly-guide)
-- [Getting Started](#getting-started)
-- [Integration with nEEGlace System](#integration-with-neEglace-system)
-- [Recommended Additions for Research Use](#recommended-additions-for-research-use)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -87,44 +81,6 @@ hardware/MIC/
 
 ## Hardware Overview
 
-
-
----
-
-## Key Specifications
-
-| Parameter | Value | Source |
-|-----------|-------|--------|
-| **Microphone** | ICS-40638 (TDK InvenSense) | — |
-| Mic type | Analog MEMS, differential output | Datasheet |
-| Sensitivity | −43 dBV/Pa (differential), ±1 dB tolerance | Datasheet |
-| SNR | 63 dB (A-weighted) | Datasheet |
-| Acoustic Overload Point (AOP) | 138 dB SPL | Datasheet |
-| Dynamic range | ~75 dB | Derived (AOP − noise floor) |
-| Frequency response | 35 Hz – 20 kHz | Datasheet |
-| Mic supply voltage | 1.52 V – 3.63 V (nominal: 3.3 V) | Datasheet |
-| Mic supply current | 170 µA typical | Datasheet |
-| Package | 3.50 × 2.65 × 0.98 mm, bottom-port LGA | Datasheet |
-| Operating temperature | −40°C to +105°C | Datasheet |
-| **Op-Amp** | MAX74810 (Analog Devices / Maxim) | — |
-| Topology | Dual-channel, zero-drift, chopper-stabilised | Datasheet |
-| Input voltage noise | 5.8 nV/√Hz @ 1 kHz | Datasheet |
-| Input offset voltage | 7 µV maximum | Datasheet |
-| Offset drift | 30 nV/°C maximum | Datasheet |
-| Gain-bandwidth product | 2.7 MHz | Datasheet |
-| Supply voltage range | 4.5 V – 50 V (single supply) | Datasheet |
-| PSRR | −81 dB | Datasheet |
-| Output | Rail-to-rail | Datasheet |
-| EMI immunity | Integrated input EMI filters | Datasheet |
-| Package | SOIC-8 | Datasheet |
-| **System** | | |
-| Amplifier gain | ~11× (~20.8 dB) | Calculated |
-| High-pass cutoff | ~1.6 Hz | Calculated |
-| Mic supply | 3.3 V | PCB layout |
-| Op-amp supply | 5 V | PCB layout |
-
----
-
 ## Component Reference
 
 ### MEMS Microphone — ICS-40638 (TDK InvenSense)
@@ -145,16 +101,6 @@ Unlike a traditional electret condenser capsule, the ICS-40638 integrates three 
 
 Because the ICS-40638 has an **internal impedance converter and output amplifier**, it does **not** require an external bias resistor network — a key difference from traditional electret capsules. The 3.3 V supply powers the internal circuitry directly via the VDD pin; no external biasing components are needed.
 
-**Performance highlights relevant to nEEGlace:**
-
-| Feature | Value | Why it matters for EEG |
-|---------|-------|------------------------|
-| AOP: 138 dB SPL | Survives very loud environments | Lab equipment, transport, social settings |
-| SNR: 63 dB | High-fidelity capture | Distinguishes speech onset from background noise |
-| ±1 dB sensitivity tolerance | Consistent channel-to-channel | Stereo matching without calibration |
-| RF immunity | Enhanced (integrated EMI filter) | Robust near EEG amplifier and wireless radios |
-| Operating to 105°C | Stable on skin-worn device | Body heat + enclosure warming |
-| 35 Hz – 20 kHz | Full audio band | Captures all speech and environmental sound features |
 
 **Bottom-port assembly note:**
 
@@ -174,19 +120,6 @@ The ICS-40638 is a **bottom-port** microphone — the acoustic port faces down, 
 - **Part number:** MAX74810
 - **Package:** SOIC-8 (8-pin, 1.27 mm pitch SMD)
 - **Supply:** 5 V single supply (within 4.5–50 V operating range)
-
-**Standard SOIC-8 dual op-amp pinout:**
-
-| Pin | Function |
-|-----|----------|
-| 1 | Channel A — Output |
-| 2 | Channel A — Inverting Input (−) |
-| 3 | Channel A — Non-Inverting Input (+) |
-| 4 | V− (GND) |
-| 5 | Channel B — Non-Inverting Input (+) |
-| 6 | Channel B — Inverting Input (−) |
-| 7 | Channel B — Output |
-| 8 | V+ (5 V) |
 
 **Why the MAX74810 is the right choice here:**
 
@@ -354,15 +287,6 @@ The ICS-40638 has −43 dBV sensitivity at 1 Pa (94 dB SPL), meaning its differe
 
 At the operating supply of 5 V with rail-to-rail output, the MAX74810 saturates at ~5 V output. The ICS-40638's own AOP (138 dB) sets the ultimate input limit, not the amplifier — a well-matched design decision.
 
-### Frequency Response
-
-| Parameter | Value | Determined by |
-|-----------|-------|--------------|
-| Low-frequency cutoff | 35 Hz | ICS-40638 MEMS element |
-| Effective high-pass (coupling caps) | ~1.6 Hz | 10 µF + 10 kΩ (below mic cutoff, not limiting) |
-| High-frequency cutoff | ~245 kHz | MAX74810 GBW / gain |
-| Usable audio bandwidth | 35 Hz – 20 kHz | Flat within ±1 dB |
-
 ### Noise Analysis
 
 **System input-referred noise (estimated):**
@@ -468,24 +392,6 @@ Connect to the nEEGlace main board MIC header, or to the Bela Cape's `R-Mic` / `
 
 ---
 
-## Assembly Guide
-
-### Component Placement Order
-
-1. **ICS-40638 MEMS mic (LGA)** — place first while the board is bare; the bottom-port requires a PCB sound hole to be pre-drilled/routed; use low-temperature reflow, do not exceed J-STD-020 profile
-2. **SMD resistors** — 10K (×2), 10K2 (×2), 100K (×1); 0402 or 0603
-3. **SMD capacitors** — 10µF (×3); check polarity if using polarised capacitors; ceramic preferred for audio (no microphonics)
-4. **MAX74810 (SOIC-8)** — apply flux, tack pin 1 first, reflow remaining pins; inspect under magnification for bridges
-5. **4-pin output connector** — through-hole; solder last to avoid mechanical stress on SMD joints
-
-### Critical Assembly Notes
-
-- **ICS-40638 sound hole:** Ensure the 0.5–1.0 mm PCB hole beneath the mic is clear of solder paste and debris before mounting. A blocked port will severely attenuate the microphone response.
-- **ICS-40638 reflow:** Do not vacuum-grip from the bottom (port side). Pick-and-place vacuum should contact the lid (top surface only). Do not exceed the InvenSense recommended reflow profile.
-- **MAX74810 pin 1:** Confirm orientation — the dot or chamfer on the SOIC package aligns with the square pad on the PCB footprint. Incorrect orientation will apply 5 V to the input pins and destroy the device.
-- **No Interactive BOM yet:** Until an ibom.html is added, use `PCB_Mic.png` alongside the BOM CSV for placement reference.
-- **Ceramic capacitors for audio:** Prefer X5R or X7R ceramic 10 µF over electrolytic — no polarity concern, lower ESR, no microphonic noise (electrolytic caps can pick up vibration as noise in wearable applications).
-
 ### Post-Assembly Test
 
 ```
@@ -500,141 +406,3 @@ Connect to the nEEGlace main board MIC header, or to the Bela Cape's `R-Mic` / `
 ```
 
 ---
-
-## Getting Started
-
-### Step 1 — Order the PCB
-
-Send `Gerber_Mic_PCB.zip` to a PCB manufacturer. Recommended settings:
-
-| Setting | Value | Reason |
-|---------|-------|--------|
-| Layers | 2 | Standard |
-| Thickness | 1.6 mm | Standard mechanical compatibility |
-| Surface finish | **ENIG** (gold) | Required for ICS-40638 LGA pads — HASL wicks solder unevenly on fine-pitch LGA |
-| Copper weight | 1 oz | Standard |
-| PCB sound hole | 0.5–1.0 mm | Must be specified in Gerbers beneath the ICS-40638 footprint |
-
-EU fab options:
-
-| Fab | Region | Notes |
-|-----|--------|-------|
-| [JLCPCB](https://jlcpcb.com) | Global | PCBA available; supports ENIG |
-| [PCBWay](https://pcbway.com) | Global | PCBA + ENIG |
-| [Aisler](https://aisler.net) | Europe (DE) | GDPR-compliant, ENIG available |
-| [Eurocircuits](https://eurocircuits.com) | Europe (BE) | Highest EU quality; ideal for LGA footprints |
-
-### Step 2 — Source Components
-
-Use `Assembly files/BOM_Mic_PCB.csv` for exact part numbers.
-
-| Component | Part | Suggested Supplier |
-|-----------|------|--------------------|
-| ICS-40638 | TDK InvenSense ICS-40638 | [Mouser](https://mouser.de), [DigiKey](https://digikey.de) |
-| MAX74810 | Analog Devices MAX74810 | [Mouser](https://mouser.de), [Farnell](https://de.farnell.com) |
-| 10 kΩ resistors (×4) | 0402 or 0603, 1% | [Reichelt](https://reichelt.de) |
-| 100 kΩ resistor (×1) | 0402 or 0603, 1% | [Reichelt](https://reichelt.de) |
-| 10 µF capacitors (×3) | 0603 or 0805, X5R ceramic, 10V | [Reichelt](https://reichelt.de), [TME](https://tme.eu) |
-| 4-pin connector | 0.1" (2.54mm) through-hole header | [Reichelt](https://reichelt.de) |
-
----
-
-## Integration with nEEGlace System
-
-The MIC PCB is a daughter module within the **nEEGlace** hardware architecture:
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                     nEEGlace System                          │
-│                                                              │
-│  ┌──────────────┐   ┌──────────────┐   ┌─────────────────┐  │
-│  │   MIC PCB    │──►│  Bela Cape   │──►│  BeagleBone     │  │
-│  │              │   │ (Bela Gem    │   │  Black / AI     │  │
-│  │ ICS-40638    │   │  Stereo)     │   │                 │  │
-│  │ MEMS mic     │   │ Audio codec  │   │  Bela real-time │  │
-│  │ MAX74810     │   │ D0/D1 trig   │   │  PRU + DSP      │  │
-│  │ 11× gain     │   │ ADC inputs   │   │                 │  │
-│  └──────────────┘   └──────────────┘   └─────────────────┘  │
-│                                                              │
-│   EEG electrodes ──► [EEG front-end] ──► ADC ──► BeagleBone │
-└──────────────────────────────────────────────────────────────┘
-```
-
-**Role in EEG/neuroscience workflows:**
-
-The microphone captures acoustic events (speech onset, click trains, music beats, noise bursts) simultaneously with EEG. The Bela PRU can output a TTL trigger on D0/D1 at audio onset, which is recorded by the EEG amplifier as an event marker. Post-hoc, the acoustic signal and the EEG data are aligned using these shared timestamps for:
-
-- Auditory Evoked Potential (AEP) analysis
-- Speech perception research (N400, MMN components)
-- Naturalistic EEG paradigms (cognitive load in noisy environments)
-- Acoustic artefact detection in EEG (motion noise from necklace movement)
-
-**Connection to Bela Cape:**
-- Pin 4 (R, audio out) → Bela Cape `R-Mic` connector signal pin
-- Pin 3 (GND) → Bela Cape GND
-- Pin 2 (3.3V) → Bela Cape VD2 connector (3.3V)
-- Pin 1 (5V) → Bela Cape 5V Input connector
-
----
-
-## Recommended Additions for Research Use
-
-### Immediate Priority (Missing from Current Repository)
-
-- [ ] **Schematic PDF** — the most critical missing document; without it, the circuit cannot be verified, modified, or peer-reviewed. Export from KiCad as PDF and add to the `/hardware/MIC/` directory.
-- [ ] **Interactive BOM** — generate with the [KiCad InteractiveHtmlBom plugin](https://github.com/openscopeproject/InteractiveHtmlBom); add `InteractiveBOM_MicPCB.html` to the repository
-
-### Hardware (Next PCB Revision)
-
-- [ ] **100 nF decoupling capacitor on ICS-40638 VDD pin** — the datasheet explicitly recommends a 0.1 µF ceramic cap placed as close as possible to the VDD pin; this should be in addition to the 10 µF cap, not instead of it
-- [ ] **Test points** on: ICS-40638 MIC+ output (before coupling cap), ICS-40638 MIC− output (before coupling cap), MAX74810 output (pin 4, R), 3.3V rail, 5V rail, GND — essential for oscilloscope probing during bring-up
-- [ ] **Second channel output** — the MAX74810 has a second op-amp channel; routing it to a second output pin (L) enables true stereo mic capture
-- [ ] **Gain adjustment** — replacing the fixed 100 kΩ feedback resistor with a 100 kΩ trimmer allows in-field gain tuning for different deployment environments (quiet lab vs. noisy street)
-- [ ] **ESD protection array** (e.g. PRTR5V0U4Y) on the output connector pins — protects the MAX74810 output from discharge during cable hot-plug
-- [ ] **Mounting holes** (2× M2 or M3) for mechanical attachment inside the necklace housing
-- [ ] **Silkscreen improvement** — add IC designator (`U1: ICS-40638`, `U2: MAX74810`) to the board silkscreen for unambiguous assembly identification
-
-### Software / Firmware
-
-- [ ] **Bela sketch** — minimal working example demonstrating microphone capture via the MIC PCB, with D0/D1 trigger output marking acoustic event onset
-- [ ] **SNR characterisation script** — Python script using a calibrated diffuse-field sound source (or ITU-T P.50 noise) to measure the amplifier's actual SNR and compare to the ICS-40638 datasheet spec
-- [ ] **Frequency response sweep** — MATLAB/Python script using a log-sine sweep + Bela ADC to plot the actual transfer function from 20 Hz to 20 kHz
-
-### Documentation
-
-- [ ] **Measured performance table** — actual gain, noise floor, SNR, frequency response, and power consumption from a populated test board; compare to theoretical values in this README
-- [ ] **Wiring diagram** — explicit diagram showing the 4-pin connector to Bela Cape and to nEEGlace main board, with wire colour coding
-- [ ] **ICS-40638 PCB mounting guide** — link to InvenSense AN-1003 (bottom-port mounting recommendations) directly in this README for assemblers
-
-### Repository
-
-- [ ] **GitHub Release** with Gerbers attached as release assets for citation-stable hardware versioning
-- [ ] **DOI via Zenodo** for academic citation in methods sections
-- [ ] **KiBot CI workflow** — auto-generate Gerbers, BOM, and renders on every commit
-
----
-
-## Contributing
-
-This module is part of the **nEEGlace open-source hardware** project. Contributions are welcome:
-
-1. Fork `nEEGlace-OSH`
-2. Create a descriptive branch: `git checkout -b hw/mic-add-100nF-decoupling`
-3. Make your changes; for hardware changes, regenerate Gerbers and update the BOM CSV
-4. Open a Pull Request with a description of what changed and why
-
-For schematic or layout changes, please include before/after screenshots of the affected PCB area.
-
----
-
-## License
-
-Hardware designs (PCB layout, Gerbers, 3D model) are released under the **CERN Open Hardware Licence v2 – Permissive (CERN-OHL-P)**.
-
-You are free to study, manufacture, and modify this hardware for personal or commercial use, with attribution.
-
-> **Academic use:** If this microphone module is used in published EEG or neuroscience research, please cite the nEEGlace repository. A Zenodo DOI will be added here once a stable release is archived.
-
----
-
-*Designed in KiCad · ICS-40638 MEMS mic + MAX74810 zero-drift op-amp · Part of the nEEGlace open-source wearable EEG platform*
