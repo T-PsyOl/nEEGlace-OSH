@@ -87,25 +87,7 @@ hardware/MIC/
 
 ## Hardware Overview
 
-```
-  ┌───────────────────────────────────────────────────────┐
-  │                  MIC PCB — TOP VIEW                    │
-  │                                                        │
-  │  [ICS-40638 MEMS Mic]    [10K] [10K2]   [100K]       │
-  │   Bottom-port LGA         [10K] [10K2]   [10µF]       │
-  │   3.5×2.65×0.98mm         [10µF][10µF]               │
-  │                                                        │
-  │                    [MAX74810 SOIC-8]                   │
-  │                    Dual zero-drift op-amp              │
-  │                                                        │
-  │   3.3V ──► Mic VDD                    ┌─ 4-pin conn ─┐│
-  │   5V   ──► Op-Amp V+                  │ 4: R (audio) ││
-  │   GND  ──► Common                     │ 3: GND       ││
-  │                                        │ 2: 3.3V      ││
-  │                                        │ 1: 5V        ││
-  │                                        └──────────────┘│
-  └───────────────────────────────────────────────────────┘
-```
+
 
 ---
 
