@@ -450,7 +450,7 @@ void render(BelaContext *context, void *userData) {
                 // Set the activation counter
                 activationCounter = activationDurationSamples;
                 // Activate the digital output pin
-                digitalWrite(context, n, digitalPin, HIGH);
+                //digitalWrite(context, n, digitalPin, HIGH);
             }
 
             // Decrement the refractory counter
@@ -459,13 +459,18 @@ void render(BelaContext *context, void *userData) {
                 // If the refractory counter is negative, set it to 0
                 if (refractoryCounter < 0) refractoryCounter = 0;
             }
-            // Decrement the activation counter
-            if (activationCounter > 0) {
-                activationCounter--;
-                // If the activation counter is 0, deactivate the digital output pin
-                if (activationCounter == 0) digitalWrite(context, n, digitalPin, LOW);
-            }
+            
         }
+		
+		// Maintain digital output state every sample
+		if (activationCounter > 0) {
+		    digitalWrite(context, n, digitalPin, HIGH);
+		    activationCounter--;
+		} else {
+		    digitalWrite(context, n, digitalPin, LOW);
+		}
+
+		
 
         // Generate the tone output
         float out = sinf(phase);
