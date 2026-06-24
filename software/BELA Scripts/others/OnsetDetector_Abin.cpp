@@ -29,8 +29,8 @@ const std::string configFilename = "config.txt";
 // Define the configuration parameters
 int bufferSize = 512;                           // Number of samples stored in buffer for energy calculation
 int hopSize = 256;                              // Interval at which buffer is processed
-float refractoryPeriod = 0.5;                  // Refractory period (sec) - time between onset detections
-float activationDuration = 0.05;               // Duration to activate the digital output pin after onset detection (sec)
+float refractoryPeriod = 0.2;                  // Refractory period (sec) - time between onset detections
+float activationDuration = 0.5;               // Duration to activate the digital output pin after onset detection (sec)
 float inputGain = 20;                          // Input gain for the microphones    
 float energyThreshold = 0.001;                  // Threshold for detecting an onset
 float toneFreq = 200.0;                        // Frequency of the tone to be generated
@@ -63,8 +63,8 @@ float slowLevelDb=-100.0f;
 float fastAlpha = 0.3f;    // reacts quickly to onsets
 float slowAlpha = 0.01f;  //tracks background slowly
 
-//float onsetThresholdDb = 5.0f; //more sensitive
-float onsetThresholdDb = 8.0f; //onset if fast level is 8 dB above slow level0
+float onsetThresholdDb = 4.0f; //more sensitive
+//float onsetThresholdDb = 8.0f; //onset if fast level is 8 dB above slow level0
 //float onsetThresholdDb = 12.0f; //much stricter
 
 // Define the record buffer
