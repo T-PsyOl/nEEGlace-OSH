@@ -17,8 +17,10 @@
 #include <libraries/Biquad/Biquad.h>
 #include <algorithm>
 #include <ctime>
+#include <regex>
 #include <libraries/Scope/Scope.h>
 #include <fftw3.h>  // Required for FFT
+
 
 #include "startupLogger.h"
 
@@ -27,6 +29,8 @@ Scope scope;
 
 // Define the configuration file name
 const std::string configFilename = "config.txt"; 
+// Define the startup log file name
+const std::string logFile = "bela_startup_log.txt"; 
 
 // Define the configuration parameters
 int bufferSize = 512;                           // Number of samples stored in buffer for energy calculation
@@ -109,14 +113,50 @@ std::vector<float> fftAnalysisWindow;
 
 
 // Function to generate a unique filename (adds the current timestamp)
-std::string generateFilename(const std::string& baseFilename) {
+//std::string generateFilename(const std::string& baseFilename) {
     // Get the current time
-    std::time_t now = std::time(nullptr);
-    char timestamp[20];
-    std::strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", std::localtime(&now));
-    // Return the base filename with the timestamp appended
-    return baseFilename + "_" + timestamp;
+//    std::time_t now = std::time(nullptr);
+//    char timestamp[20];
+//    std::strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", std::localtime(&now));
+//    // Return the base filename with the timestamp appended
+//    return baseFilename + "_" + timestamp;
+//}
+
+// Function to generate a unique filename (adds feature file name from startup log file)
+std::string generateFilename(const std::string& logFile) {
+
+    std::ifstream file(logFile);
+
+    if (!file.is_open()) {
+        std::cout << "Cannot open: " << logFile << std::endl;
+        return "";
+    }
+
+    std::string line;
+    std::string featureFilename;
+
+    while (std::getline(file, line)) {
+
+        if (line.rfind("Feature File:", 0) == 0) {
+
+            featureFilename = line.substr(std::string("Feature File:").length());
+
+            // remove spaces
+            featureFilename.erase(
+                0, featureFilename.find_first_not_of(" \t")
+            );
+
+            featureFilename.erase(
+                featureFilename.find_last_not_of(" \t\r\n") + 1
+            );
+        }
+    }
+
+    std::cout << "Feature filename found: [" << featureFilename << "]" << std::endl;
+
+    return featureFilename;
 }
+
 
 // Function to read from config file 
 bool readConfig(const std::string& filename) {
@@ -317,7 +357,7 @@ bool setup(BelaContext *context, void *userData) {
 
 	// CSV File to save Audio Featues
 	// Generate a unique filename for the CSV file
-	csvFilename = generateFilename("audio_features") + ".csv";
+	csvFilename = generateFilename(logFile) + ".csv";
 	// Open the CSV file for writing
 	csvFile.open(csvFilename);
 	if (csvFile.is_open()) {
@@ -334,14 +374,14 @@ bool setup(BelaContext *context, void *userData) {
     // Setup audio recording
     if (recordAudio == 1) {
         // Generate a unique filename for the audio file
-        audioFilename = generateFilename("audiofile") + ".wav";
+        audioFilename = generateFilename(logFile) + ".wav";
         rt_printf("Audio recording is ON. Recording to file: %s\n", audioFilename.c_str());
 
         // Initialize the record buffer
         recordBuffer.resize(RECORD_BUFFER_SIZE * context->audioInChannels, 0.0f);
 		
         // Generate a unique filename for the marker file
-        markerFilename = generateFilename("markerfile") + ".txt";
+        markerFilename = generateFilename(logFile) + ".txt";
         rt_printf("Marker file: %s\n", markerFilename.c_str());
 
         // Calculate the number of frames to record
