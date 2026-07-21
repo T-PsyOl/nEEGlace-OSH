@@ -105,7 +105,7 @@ nEEGlace BMS/
 
 ## <ins>Hardware Components</ins>
 
-1. [3.7 V 6000 mAh Li-ion battery][(https://www.reichelt.de/de/de/shop/produkt/li-ion_akku_soldered_333289_6000_mah_3_7_v-373553?PROVID=2788&gad_source=1&gad_campaignid=183379230&gbraid=0AAAAADwnxta8x0yYWdivk4HIYVx2_J6NZ&gclid=CjwKCAiA3L_JBhAlEiwAlcWO51JmLiWQyC8HWgx-cUKDrKQgi5Q3NVtTysLjH48ZbLqRPE6nEGL0sRoC1l8QAvD_BwE)](https://www.reichelt.de/de/de/shop/produkt/ersatzakku_jbl_charge_li-po_6000_mah-248010)
+1. [3.7 V 6000 mAh Li-ion battery](https://www.reichelt.de/de/de/shop/produkt/ersatzakku_jbl_charge_li-po_6000_mah-248010)
 2. [HiLetGo USB-C / USB-A charging and discharging board](https://www.amazon.de/HiLetgo-Discharging-Integrated-Interface-Compatible/dp/B0CDWT9295)
 3. [MCP1700-330E low-dropout regulator (3.3 V)](https://www.mouser.de/ProductDetail/Microchip-Technology/MCP1700T-3302E-MB?qs=WWgnj3qycfnlJJhwyn%2Fifw%3D%3D)
 4. [Schottky Diode(for unidirectional charge routing)](https://www.mouser.de/ProductDetail/Rectron/SR340-T?qs=2Exw0Z2g%252BZB953JkMkBZbA%3D%3D&mgh=1&vip=1&utm_id=20979042631&utm_source=google&utm_medium=cpc&utm_marketing_tactic=emeacorp&gad_source=1&gad_campaignid=20975737652&gbraid=0AAAAADn_wf0w41oU7Wab0nVdvJgo4DlKu&gclid=CjwKCAiA3L_JBhAlEiwAlcWO5z4tOhBydDzV852ASn-9xmEuQRKEQAsSAIz2j41eMdDuO-YCp13g2hoCTvcQAvD_BwE)
