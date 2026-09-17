@@ -1,0 +1,13 @@
+inputGain 43.0
+activationDuration 0.05
+refractoryPeriod 0.5
+toneFreq 200
+recordAudio 0
+recordDuration 20
+svf_cutoff_Hz 800
+svf_Q 0.707107
+threshBase 16 8 4 4
+jumpFactor 4 6 32 8
+decayConst 8000 100 100 2000
+tauFast_ms 2 2 2 4
+tauSlow_ms 20 10 5 160
