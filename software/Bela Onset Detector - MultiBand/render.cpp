@@ -48,12 +48,21 @@ std::string markerFilename;
 unsigned int recordingFrames = 0;
 
 // feature extraction
-const int FFT_SIZE = 512;
+const int FFT_SIZE = 2048;
 FeatureCalculator features(FFT_SIZE);
 std::vector<float> audioBuffer(FFT_SIZE, 0.0f);
 int audioBufferIndex = 0;
 unsigned int audioBufferFilled = 0;
 std::vector<float> featureWindow(FFT_SIZE, 0.0f);
+// for feature extraction window
+bool featurePending = false;
+int featureDelayCounter = 0;
+const int featureDelaySamples = FFT_SIZE + 128; 
+struct PendingEvent {
+    unsigned int onset_index;
+    double onset_time;
+};
+PendingEvent pendingEvent;
 
 
 // onset event logging
@@ -70,8 +79,8 @@ struct OnsetEvent
     double onset_time;
     float rms;
     //float levelDb;
-    //float dominantFrequency;
-    float spectralCentroid;
+    float dominantFrequency;
+    //float spectralCentroid;
     //float spectralEnergy;
     //float lowEnergy;
     //float midEnergy;
@@ -276,13 +285,13 @@ void logEvents(BelaContext* context)
             << std::setprecision(8)
             << event.rms << ","
 
-            //<< std::setprecision(4)
+            << std::setprecision(4)
             //<< event.levelDb << ","
 
-            //<< event.dominantFrequency << ","
-            << event.spectralCentroid << ","
+            << event.dominantFrequency << ","
+            //<< event.spectralCentroid << ","
 
-            << std::setprecision(8)
+            //<< std::setprecision(8)
             //<< event.spectralEnergy << ","
             //<< event.lowEnergy << ","
             //<< event.midEnergy << ","
@@ -348,8 +357,8 @@ bool setup(BelaContext* context, void* /*userData*/)
             << "onset_time,"
             << "rms,"
             //<< "level_dB,"
-            //<< "dominant_frequency_Hz,"
-            << "spectral_centroid_Hz\n";
+            << "dominant_frequency_Hz,\n";
+            //<< "spectral_centroid_Hz\n"
             //<< "spectral_energy,"
             //<< "low_band_energy,"
             //<< "mid_band_energy,"
@@ -454,57 +463,48 @@ void render(BelaContext* context, void* /*userData*/)
 
             ++onset_index;
 
-			// get event features 
-            getFeatureWindow();
-            // calculate RMS
-			const float rms = features.computeRMS(featureWindow);
-            // calculate FFT
-            const bool fftOK = features.computeFFT(featureWindow);
-            // float dominantFrequency = 0.0f;
-            float spectralCentroid = 0.0f;
-            // float spectralEnergy = 0.0f;
-            // float lowEnergy = 0.0f;
-            // float midEnergy = 0.0f;
-            // float highEnergy = 0.0f;
-            if (fftOK)
-            {
-                //dominantFrequency = features.computeDominantFrequency();
-                spectralCentroid = features.computeSpectralCentroid();
-                //spectralEnergy = features.computeSpectralEnergy();
-                // lowEnergy = features.computeLowBandEnergy();
-                // midEnergy = features.computeMidBandEnergy();
-                // highEnergy = features.computeHighBandEnergy();
-            }
-
-            // store event + features
-            OnsetEvent event;
-            event.onset_index = onset_index;
-            event.onset_time = onset_time;
-            event.rms = rms;
-            // event.levelDb = levelDb;
-            // event.dominantFrequency = dominantFrequency;
-            event.spectralCentroid = spectralCentroid;
-            // event.spectralEnergy = spectralEnergy;
-            // event.lowEnergy = lowEnergy;
-            // event.midEnergy = midEnergy;
-            // event.highEnergy = highEnergy;
-
-            onsetBuffer.push_back(event);
-            if (onsetBuffer.size() >MAX_ONSET_EVENTS)
-            {
-                onsetBuffer.erase(onsetBuffer.begin());
-            }
+			// set feature extraction flag
+		    pendingEvent.onset_index = onset_index;
+		    pendingEvent.onset_time  = onset_time;
+		    featurePending = true;
+		    featureDelayCounter = featureDelaySamples;
+		
+		    refractoryCounter = refractoryPeriodSamples;
+		    timeSinceLastOnset = 0;
 
             // refractory period
             refractoryCounter = refractoryPeriodSamples;
             timeSinceLastOnset = 0;
         }
 
+		// check feature calculation flag
+		if (featurePending)
+		{
+		    if (--featureDelayCounter <= 0)
+		    {
+		        featurePending = false;
+		
+		        getFeatureWindow();
+		        const float rms = features.computeRMS(featureWindow);
+		        const bool fftOK = features.computeFFT(featureWindow);
+		        float dominantFrequency = 0.0f;
+		        if (fftOK)
+		            dominantFrequency = features.computeDominantFrequency();
+		
+		        OnsetEvent event;
+		        event.onset_index = pendingEvent.onset_index;
+		        event.onset_time  = pendingEvent.onset_time;
+		        event.rms = rms;
+		        event.dominantFrequency = dominantFrequency;
+		
+		        onsetBuffer.push_back(event);
+		        if (onsetBuffer.size() > MAX_ONSET_EVENTS)
+		            onsetBuffer.erase(onsetBuffer.begin());
+		    }
+		}
 
-        // ----------------------------------------------------
-        // Refractory and timing counters
-        // ----------------------------------------------------
 
+        // refractory and timing counters
         if (refractoryCounter > 0) --refractoryCounter;
         ++timeSinceLastOnset;
 
@@ -605,7 +605,7 @@ void cleanup(BelaContext* context, void* /*userData*/)
                 << std::setprecision(8)
                 << event.rms << ","
 
-                << event.spectralCentroid << ","
+                << event.dominantFrequency << ","
                 << "\n";
         }
 
