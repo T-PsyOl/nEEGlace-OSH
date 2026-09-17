@@ -141,16 +141,15 @@ public:
             return 0.0f;
 
         const int numberOfBins = fftSize_ / 2 + 1;
-        if (numberOfBins <= 1)
+        if (numberOfBins <= 3)
             return 0.0f;
 
-        int maxBin = 1;
-        float maxMagnitude = getMagnitude(1);
+        int maxBin = 2;
+        float maxMagnitude = getMagnitude(2);
 
-        for (int bin = 2; bin < numberOfBins; ++bin)
+        for (int bin = 3; bin < numberOfBins; ++bin)
         {
             const float magnitude = getMagnitude(bin);
-
             if (magnitude > maxMagnitude)
             {
                 maxMagnitude = magnitude;
@@ -158,7 +157,28 @@ public:
             }
         }
 
-        return getBinFrequency(maxBin);
+        // return getBinFrequency(maxBin);
+		
+		// parabolic interpolation using neighbors, guard against edge bins
+	    if (maxBin <= 1 || maxBin >= numberOfBins - 1)
+	        return getBinFrequency(maxBin);
+	
+	    const float alpha = getMagnitude(maxBin - 1);
+	    const float beta  = getMagnitude(maxBin);
+	    const float gamma = getMagnitude(maxBin + 1);
+		
+	    const float denom = (alpha - 2.0f * beta + gamma);
+	    float delta = 0.0f;
+	    if (std::fabs(denom) > 1e-12f)
+	        delta = 0.5f * (alpha - gamma) / denom;
+	
+	    // clamp for safety — interpolation should stay within +/-1 bin
+	    if (delta > 1.0f) delta = 1.0f;
+	    if (delta < -1.0f) delta = -1.0f;
+	
+	    const float interpolatedBin = static_cast<float>(maxBin) + delta;
+	    return interpolatedBin * sampleRate_ / static_cast<float>(fftSize_);
+		
     }
 
 
