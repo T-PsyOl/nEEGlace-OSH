@@ -29,7 +29,7 @@ float toneFreq            = 200.0f;
 double recordAudio        = 1;
 double recordDuration     = 20.0;
 
-bool fullspectrum = true; 
+bool fullspectrum = false; 
 
 // onset detector
 OnsetDetectorParams detectorParams;
