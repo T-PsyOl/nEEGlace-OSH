@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <ctime>
+#include <array>
 
 #include <libraries/AudioFile/AudioFile.h>
 #include <libraries/Scope/Scope.h>
@@ -27,6 +28,8 @@ float refractoryPeriod    = 0.5f;
 float toneFreq            = 200.0f;
 double recordAudio        = 1;
 double recordDuration     = 20.0;
+
+bool fullspectrum = true; 
 
 // onset detector
 OnsetDetectorParams detectorParams;
@@ -85,6 +88,8 @@ struct OnsetEvent
     //float lowEnergy;
     //float midEnergy;
     //float highEnergy;
+
+	std::array<float, FFT_SIZE / 2 + 1> magnitudes{};
 };
 
 
@@ -277,18 +282,18 @@ void logEvents(BelaContext* context)
     {
         csvFile
             << std::fixed
-            << std::setprecision(4)
+            << std::setprecision(2)
 
             << event.onset_index << ","
             << event.onset_time << ","
 
-            << std::setprecision(8)
+            << std::setprecision(2)
             << event.rms << ","
 
-            << std::setprecision(4)
+            << std::setprecision(2)
             //<< event.levelDb << ","
 
-            << event.dominantFrequency << ","
+            << event.dominantFrequency;
             //<< event.spectralCentroid << ","
 
             //<< std::setprecision(8)
@@ -297,7 +302,17 @@ void logEvents(BelaContext* context)
             //<< event.midEnergy << ","
             //<< event.highEnergy
 
-            << "\n";
+			if(fullspectrum)
+			{
+				for (int bin = 0; bin <= FFT_SIZE / 2; ++bin)
+					{
+						csvFile << "," << std::setprecision(2) << event.magnitudes[bin];
+					}
+				
+			
+			}
+
+            csvFile << "\n";
     }
 
 
@@ -357,12 +372,22 @@ bool setup(BelaContext* context, void* /*userData*/)
             << "onset_time,"
             << "rms,"
             //<< "level_dB,"
-            << "dominant_frequency_Hz,\n";
-            //<< "spectral_centroid_Hz\n"
+            << "dominant_frequency_Hz";
+            //<< "spectral_centroid_Hz"
             //<< "spectral_energy,"
             //<< "low_band_energy,"
             //<< "mid_band_energy,"
-            //<< "high_band_energy\n";
+            //<< "high_band_energy";
+
+		if(fullspectrum)
+		{
+			for(int bin=0; bin<=FFT_SIZE/2; ++bin)
+				{
+					//csvFile << "," << features.getBinFrequency(bin) << "Hz";
+					csvFile << "," << static_cast<int>(features.getBinFrequency(bin)) << "Hz";
+				}
+		}
+		csvFile << "\n";
 
         csvFile.flush();
         csvFileOpen = true;
@@ -483,20 +508,31 @@ void render(BelaContext* context, void* /*userData*/)
 		    if (--featureDelayCounter <= 0)
 		    {
 		        featurePending = false;
+				OnsetEvent event;
 		
 		        getFeatureWindow();
 		        const float rms = features.computeRMS(featureWindow);
 		        const bool fftOK = features.computeFFT(featureWindow);
 		        float dominantFrequency = 0.0f;
 		        if (fftOK)
-		            dominantFrequency = features.computeDominantFrequency();
-		
-		        OnsetEvent event;
+				{
+					dominantFrequency = features.computeDominantFrequency();
+
+					// if fullspectrum is true
+					if(fullspectrum)
+					{
+						for(int bin=0; bin<= FFT_SIZE/2; ++bin)
+							{
+								event.magnitudes[bin] = features.getMagnitude(bin);				
+							}
+					}
+					
+				}
+		            
 		        event.onset_index = pendingEvent.onset_index;
 		        event.onset_time  = pendingEvent.onset_time;
 		        event.rms = rms;
 		        event.dominantFrequency = dominantFrequency;
-		
 		        onsetBuffer.push_back(event);
 		        if (onsetBuffer.size() > MAX_ONSET_EVENTS)
 		            onsetBuffer.erase(onsetBuffer.begin());
@@ -597,16 +633,24 @@ void cleanup(BelaContext* context, void* /*userData*/)
         {
             csvFile
                 << std::fixed
-                << std::setprecision(4)
+                << std::setprecision(2)
 
                 << event.onset_index << ","
                 << event.onset_time << ","
 				
-                << std::setprecision(8)
+                << std::setprecision(2)
                 << event.rms << ","
 
-                << event.dominantFrequency << ","
-                << "\n";
+                << event.dominantFrequency;
+
+			if(fullspectrum)
+			{
+				for (int bin = 0; bin <= FFT_SIZE / 2; ++bin)
+		        {
+		            csvFile << "," << std::setprecision(8) << event.magnitudes[bin];
+		        }
+			}
+                csvFile << "\n";
         }
 
         csvFile.flush();
